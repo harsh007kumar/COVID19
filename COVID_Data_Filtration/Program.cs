@@ -27,22 +27,24 @@ namespace COVID_Data_Filtration
             using (StreamReader file = new StreamReader(textFilePath))
             {
                 bool readLine = false;
-                string line;
+                string line, A_Date, B_State;
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] fields = line.Split('\t');
                     if (readLine)
                     {
+                        B_State = fields[2];
                         if (!infectedStates.Contains(fields[2]))
                             infectedStates.Add(fields[2]);
+                        A_Date = fields[1];
                         if (!uniqueDates.Contains(Convert.ToDateTime(fields[1])))
                         {
                             uniqueDates.Add(Convert.ToDateTime(fields[1]));
                             noOfColumns.Append(tabSpace).Append(fields[1]);         // Append unique dates to List of Columns
                         }
-                        else
-                            noOfColumns.Append(fields[2]);                              // Append existing columns from text file 1st line
                     }
+                    else
+                        noOfColumns.Append(fields[1]);                              // Append existing columns from text file 1st line
                     readLine = true;
                 }
                 file.Close();
