@@ -58,10 +58,10 @@ namespace COVID_Data_Filtration
         /// <param name="infectedStates"></param>
         /// <param name="uniqueDates"></param>
         /// <returns></returns>
-        public static Dictionary<string,string> ProcessTxtFile(string textFilePath, ref Patient[] patientList, ref List<string> infectedStates, ref List<DateTime> uniqueDates)
+        public static Dictionary<string,string> ProcessTxtFile(string textFilePath, ref Patient[] patientList, ref List<string> infectedStates)
         {
-            Dictionary<string, string> State_And_DateWiseCases = new Dictionary<string, string>();      // Final Dictonary which is being flushed in Output text file
-            Dictionary<string, int> State_And_NoOfCasesInCurrentDate = new Dictionary<string, int>();   // Dictonary to hold values of no of cases per state for a particular date.
+            Dictionary<string, string> MasterData_State = new Dictionary<string, string>();      // Final Dictonary which is being flushed in Output text file
+            Dictionary<string, int> CurrentDate_Data = new Dictionary<string, int>();   // Dictonary to hold values of no of cases per state for a particular date.
             using (StreamReader file = new StreamReader(textFilePath))
             {
                 int lineNo = 0;
@@ -78,42 +78,21 @@ namespace COVID_Data_Filtration
                     {
                         if (currentDate != previousDate)
                         {
+                            FlushDataTillLastDate(ref MasterData_State, CurrentDate_Data);
+                            ResetStates(ref CurrentDate_Data, infectedStates);               // Reset All States Data to Zero
                             previousDate = currentDate;
-                            uniqueDates.Add(Convert.ToDateTime(currentDate));                        // Add NewDate to the list of UniqueDates
-                            Update(ref State_And_DateWiseCases, State_And_NoOfCasesInCurrentDate, uniqueDates.Count);
-                            State_And_NoOfCasesInCurrentDate.Add(stateName, 1); // Add State Name with counter 1 for current date.
                         }
-                        else
-                            Update(ref State_And_NoOfCasesInCurrentDate, stateName);
+                        CurrentDate_Data[stateName] += 1;
                         
                         // Collecting List of of all unique Patients
-                        patientList[lineNo - 1] = new Patient { ID = id, DateAnnounced = currentDate, StateName = stateName,
-                            StateCode = stateCode, PatientCurrentState = (CurrentStatus)Enum.Parse(typeof(CurrentStatus), patientStatus) };
+                        patientList[lineNo - 1] = new Patient { ID = id, DateAnnounced = currentDate, StateName = stateName, StateCode = stateCode, PatientCurrentState = patientStatus };
                     }
                     lineNo++;
                 }
                 file.Close();
                 Console.WriteLine($"File has {lineNo} lines.");
             }
-            return State_And_DateWiseCases;
-        }
-
-        private static void Update(ref Dictionary<string, string> state_And_DateWiseCases, Dictionary<string, int> state_And_NoOfCasesOnCurrentDate, int noOfDatesWithZeroCases)
-        {
-            int len = state_And_NoOfCasesOnCurrentDate.Count;
-            if(len>=1)
-            {
-                foreach(KeyValuePair<string,int> currentState in state_And_NoOfCasesOnCurrentDate)          // State-wise update to master list
-                {
-                    if (state_And_DateWiseCases.ContainsKey(currentState.Key))
-                        state_And_DateWiseCases[currentState.Key] += (tabSpace + currentState.Value);       // Update State Data with new cases for current date
-                    else
-                    {
-                        string str = fillPreviousDates(noOfDatesWithZeroCases);
-                        state_And_DateWiseCases.Add(currentState.Key, str+currentState.Value);              // Adding New State to DataSet where there have been Zero cases so far.
-                    }
-                }
-            }
+            return MasterData_State;
         }
 
         static void Main(string[] args)
@@ -126,28 +105,36 @@ namespace COVID_Data_Filtration
             List<string> infectedStates = new List<string>(noOfLines);   // Generic List of type string
             Patient[] plist = new Patient[noOfLines];                   // List of Patients
             FindNoOfInfectedStatesAndUniqueDates(SourceFile,ref infectedStates, ref uniqueDates, ref noOfColumn);
-            var AllPatientList = Covid.ProcessTxtFile(SourceFile,ref plist, ref infectedStates, ref uniqueDates);
+            var FormattedData = Covid.ProcessTxtFile(SourceFile,ref plist, ref infectedStates);
             Console.WriteLine("========================== END {0} ==========================", DateTime.UtcNow);
             Console.ReadKey();
         }
 
-
-        // Used only when new state which hasn't shown up yet in dataSet shows up and we need to fill 0 value for cases found on previous dates.
-        private static string fillPreviousDates(int noOfDatesWithZeroCases)
+        // update Data for each state till current date
+        private static void FlushDataTillLastDate(ref Dictionary<string, string> masterData_State, Dictionary<string, int> currentDate_Data)
         {
-            string blankSpaces = "";
-            while (noOfDatesWithZeroCases-- > 0)
-                blankSpaces += (tabSpace + 0);
-            return blankSpaces + tabSpace;
+            foreach (KeyValuePair<string, int> currentState in currentDate_Data)          // State-wise update to master list
+            {
+                if (masterData_State.ContainsKey(currentState.Key))
+                    masterData_State[currentState.Key] += (tabSpace + currentState.Value);       // Update State Data with new cases for current date
+                else
+                {
+                    masterData_State.Add(currentState.Key, tabSpace + currentState.Value);              // Adding New State to DataSet where there have been Zero cases so far.
+                }
+            }
         }
 
-        private static void Update(ref Dictionary<string, int> state_And_NoOfCasesOnCurrentDate, string stateName)
+        private static void ResetStates(ref Dictionary<string, int> currentDate_Data, List<string> infectedStates, int initialValue=0)
         {
-            if (state_And_NoOfCasesOnCurrentDate.ContainsKey(stateName))
-                state_And_NoOfCasesOnCurrentDate[stateName] += 1;
-            else
-                state_And_NoOfCasesOnCurrentDate.Add(stateName, 1);
+            foreach (string state in infectedStates)
+            {
+                if (currentDate_Data.ContainsKey(state))
+                    currentDate_Data[state] = initialValue;                                            // reset values to zero if preset
+                else
+                    currentDate_Data.Add(state, initialValue);                                         // add state if not present
+            }
         }
+
     }
 
     // Class to represent COVID patient details
@@ -159,7 +146,8 @@ namespace COVID_Data_Filtration
         public string DateAnnounced { get { return _date.ToString(); } set { _date = Convert.ToDateTime(value); } }
         public string StateName { get; set; }
         public string StateCode { get; set; }
-        public CurrentStatus PatientCurrentState { get; set; }
+        CurrentStatus _currentState;
+        public string PatientCurrentState { get { return Enum.GetName(typeof(CurrentStatus), _currentState).ToString(); } set { _currentState = (CurrentStatus)Enum.Parse(typeof(CurrentStatus), value); } }
     }
 
     // States of COVID-19 patients
