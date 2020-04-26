@@ -27,24 +27,24 @@ namespace COVID_Data_Filtration
             using (StreamReader file = new StreamReader(textFilePath))
             {
                 bool readLine = false;
-                string line, A_Date, B_State;
+                string line;
+                DateTime dt;
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] fields = line.Split('\t');
                     if (readLine)
                     {
-                        B_State = fields[2];
                         if (!infectedStates.Contains(fields[2]))
-                            infectedStates.Add(fields[2]);
-                        A_Date = fields[1];
+                            infectedStates.Add(fields[2]);                                          // Append unique states to List
                         if (!uniqueDates.Contains(Convert.ToDateTime(fields[1])))
                         {
-                            uniqueDates.Add(Convert.ToDateTime(fields[1]));
-                            noOfColumns.Append(tabSpace).Append(fields[1]);         // Append unique dates to List of Columns
+                            dt = Convert.ToDateTime(fields[1]);
+                            uniqueDates.Add(dt);                                                    // Append unique dates to list
+                            noOfColumns.Append(tabSpace).Append(dt.ToString("dd/MMM/yyyy"));        // Append unique dates to List of Columns
                         }
                     }
                     else
-                        noOfColumns.Append(fields[1]);                              // Append existing columns from text file 1st line
+                        noOfColumns.Append(fields[1]);                                              // Append existing columns from text file 1st line
                     readLine = true;
                 }
                 file.Close();
@@ -52,22 +52,23 @@ namespace COVID_Data_Filtration
         }
 
         /// <summary>
-        /// AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        /// Processes SourceText file and return formatted data as Dictonary with key as states and value as count of cases per day as string value
         /// </summary>
-        /// <param name="textFilePath"></param>
-        /// <param name="patientList"></param>
-        /// <param name="noOfColumns"></param>
-        /// <param name="infectedStates"></param>
-        /// <param name="uniqueDates"></param>
-        /// <returns></returns>
+        /// <param name="textFilePath">Path of source txt file</param>
+        /// <param name="patientList">List which includes details of each unqiue patient</param>
+        /// <param name="noOfColumns">Heading of output file containing all unique dates separated by tab i.e. \t </param>
+        /// <param name="infectedStates">List which contains list of all infected states which have reported cases so far</param>
+        /// <returns>FormattedData with key as States & count of patients on each days as it's value</returns>
         public static Dictionary<string,string> ProcessTxtFile(string textFilePath, ref Patient[] patientList, ref List<string> infectedStates)
         {
             Dictionary<string, string> MasterData_State = new Dictionary<string, string>();      // Final Dictonary which is being flushed in Output text file
             Dictionary<string, int> CurrentDate_Data = new Dictionary<string, int>();   // Dictonary to hold values of no of cases per state for a particular date.
+            InitializeStates(ref CurrentDate_Data, infectedStates);               // Reset All States Data to Zero
             using (StreamReader file = new StreamReader(textFilePath))
             {
                 int lineNo = 0;
                 string line, previousDate = "", id, currentDate, stateName, stateCode, patientStatus;
+                bool skipOnce = false;
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] fields = line.Split('\t');
@@ -80,8 +81,8 @@ namespace COVID_Data_Filtration
                     {
                         if (currentDate != previousDate)
                         {
-                            FlushDataTillLastDate(ref MasterData_State, CurrentDate_Data);
-                            ResetStates(ref CurrentDate_Data, infectedStates);               // Reset All States Data to Zero
+                            if(skipOnce)
+                                FlushDataTillLastDate(ref MasterData_State, CurrentDate_Data);  skipOnce = true;
                             previousDate = currentDate;
                         }
                         CurrentDate_Data[stateName] += 1;
@@ -103,16 +104,17 @@ namespace COVID_Data_Filtration
             string SourceFile = "..\\..\\SourceFile.txt";
             string OutputFile = "..\\..\\OutputFile.txt";
             StringBuilder noOfColumn = new StringBuilder();
-            int noOfLines = Covid.ReadNoOfLines(SourceFile);
-            List<DateTime> uniqueDates = new List<DateTime>(noOfLines);   // Generic List of type DateTime
-            List<string> infectedStates = new List<string>(noOfLines);   // Generic List of type string
-            Patient[] plist = new Patient[noOfLines];                   // List of Patients
+            int noOfLines = ReadNoOfLines(SourceFile);
+            List<DateTime> uniqueDates = new List<DateTime>(noOfLines);             // Generic List of type DateTime
+            List<string> infectedStates = new List<string>(noOfLines);              // Generic List of type string
+            Patient[] plist = new Patient[noOfLines];                               // List of Patients
             FindNoOfInfectedStatesAndUniqueDates(SourceFile,ref infectedStates, ref uniqueDates, ref noOfColumn);
-            Dictionary<string,string> FormattedData = Covid.ProcessTxtFile(SourceFile,ref plist, ref infectedStates);
+            // Processing Data
+            Dictionary<string,string> FormattedData = ProcessTxtFile(SourceFile,ref plist, ref infectedStates);
 
-            string[] outputBuffer = new string[noOfLines + 1];
-            PrepareOutputBuffer(ref outputBuffer, noOfColumn, FormattedData);
-            Covid.WriteToOutputFile(OutputFile, outputBuffer);
+            string[] outputBuffer = new string[infectedStates.Count + 1];           // array to hold each state data plus column fields
+            PrepareOutputBuffer(ref outputBuffer, noOfColumn, FormattedData);       // created Output buffer which is array of strings from FormattedData dictonary
+            WriteToOutputFile(OutputFile, outputBuffer);                            // Flush data
             Console.WriteLine("========================== END {0} ==========================", DateTime.UtcNow);
             Console.ReadKey();
         }
@@ -133,13 +135,13 @@ namespace COVID_Data_Filtration
         // update Data for each state till current date
         private static void FlushDataTillLastDate(ref Dictionary<string, string> masterData_State, Dictionary<string, int> currentDate_Data)
         {
-            foreach (KeyValuePair<string, int> currentState in currentDate_Data)          // State-wise update to master list
+            foreach (KeyValuePair<string, int> currentState in currentDate_Data)                // State-wise update to master list
             {
                 if (masterData_State.ContainsKey(currentState.Key))
-                    masterData_State[currentState.Key] += (tabSpace + currentState.Value);       // Update State Data with new cases for current date
+                    masterData_State[currentState.Key] += (tabSpace + currentState.Value);      // Update State Data with new cases for current date
                 else
                 {
-                    masterData_State.Add(currentState.Key, tabSpace + currentState.Value);              // Adding New State to DataSet where there have been Zero cases so far.
+                    masterData_State.Add(currentState.Key, ""+currentState.Value);                 // Adding New State to DataSet where there have been Zero cases so far.
                 }
             }
         }
@@ -155,6 +157,12 @@ namespace COVID_Data_Filtration
             }
         }
 
+        private static void InitializeStates(ref Dictionary<string, int> currentDate_Data, List<string> infectedStates, int initialValue = 0)
+        {
+            foreach (string state in infectedStates)
+                if (!currentDate_Data.ContainsKey(state))
+                    currentDate_Data.Add(state, initialValue);                                         // add state if not present
+        }
     }
 
     // Class to represent COVID patient details
