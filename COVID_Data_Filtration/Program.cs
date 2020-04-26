@@ -99,15 +99,33 @@ namespace COVID_Data_Filtration
         {
             Console.WriteLine("========================== START {0} ========================", DateTime.UtcNow);
             string SourceFile = "..\\..\\SourceFile.txt";
+            string OutputFile = "..\\..\\OutputFile.txt";
             StringBuilder noOfColumn = new StringBuilder();
             int noOfLines = Covid.ReadNoOfLines(SourceFile);
             List<DateTime> uniqueDates = new List<DateTime>(noOfLines);   // Generic List of type DateTime
             List<string> infectedStates = new List<string>(noOfLines);   // Generic List of type string
             Patient[] plist = new Patient[noOfLines];                   // List of Patients
             FindNoOfInfectedStatesAndUniqueDates(SourceFile,ref infectedStates, ref uniqueDates, ref noOfColumn);
-            var FormattedData = Covid.ProcessTxtFile(SourceFile,ref plist, ref infectedStates);
+            Dictionary<string,string> FormattedData = Covid.ProcessTxtFile(SourceFile,ref plist, ref infectedStates);
+
+            string[] outputBuffer = new string[noOfLines + 1];
+            PrepareOutputBuffer(ref outputBuffer, noOfColumn, FormattedData);
+            Covid.WriteToOutputFile(OutputFile, outputBuffer);
             Console.WriteLine("========================== END {0} ==========================", DateTime.UtcNow);
             Console.ReadKey();
+        }
+
+        private static void PrepareOutputBuffer(ref string[] outputBuffer, StringBuilder noOfColumn, Dictionary<string, string>formattedData)
+        {
+            outputBuffer[0] = noOfColumn.ToString();
+            int i = 1;
+            foreach (KeyValuePair<string, string> line in formattedData)
+                outputBuffer[i++] = line.Key + tabSpace + line.Value;
+        }
+
+        private static void WriteToOutputFile(string sourceFile, string[] outputBuffer)
+        {
+            File.WriteAllLines(sourceFile, outputBuffer);
         }
 
         // update Data for each state till current date
