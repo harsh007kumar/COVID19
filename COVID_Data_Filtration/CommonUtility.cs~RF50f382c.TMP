@@ -1,0 +1,26 @@
+﻿using System;
+using System.IO;
+
+namespace COVID_Data_Filtration
+{
+    class CommonUtility
+    {
+        public static int ReadNoOfLines(string textFilePath)
+        {
+            using (StreamReader file = new StreamReader(textFilePath))
+            {
+                int noOfLines = 0;
+                while (file.ReadLine() != null)
+                    noOfLines++;
+                file.Close();
+                Console.WriteLine($"File has {noOfLines} lines.");
+                return noOfLines;
+            }
+        }
+
+        public static void WriteToOutputFile(string sourceFile, string[] outputBuffer)
+        {
+            File.WriteAllLines(sourceFile, outputBuffer);
+        }
+    }
+}

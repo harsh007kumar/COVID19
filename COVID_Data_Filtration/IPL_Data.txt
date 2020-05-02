@@ -1,0 +1,61 @@
+﻿Winner	Match Date
+Super Kings	23-Mar-19
+KKR	24-Mar-19
+Capitals	24-Mar-19
+Kings XI	25-Mar-19
+Super Kings	26-Mar-19
+KKR	27-Mar-19
+Mum Indians	28-Mar-19
+Sunrisers	29-Mar-19
+Kings XI	30-Mar-19
+tied	30-Mar-19
+Sunrisers	31-Mar-19
+Super Kings	31-Mar-19
+Kings XI	1-Apr-19
+Royals	2-Apr-19
+Mum Indians	3-Apr-19
+Sunrisers	4-Apr-19
+KKR	5-Apr-19
+Super Kings	6-Apr-19
+Mum Indians	6-Apr-19
+Capitals	7-Apr-19
+KKR	7-Apr-19
+Kings XI	8-Apr-19
+Super Kings	9-Apr-19
+Mum Indians	10-Apr-19
+Super Kings	11-Apr-19
+Capitals	12-Apr-19
+Royals	13-Apr-19
+RCB	13-Apr-19
+Super Kings	14-Apr-19
+Capitals	14-Apr-19
+Mum Indians	15-Apr-19
+Kings XI	16-Apr-19
+Sunrisers	17-Apr-19
+Mum Indians	18-Apr-19
+RCB	19-Apr-19
+Royals	20-Apr-19
+Capitals	20-Apr-19
+Sunrisers	21-Apr-19
+RCB	21-Apr-19
+Capitals	22-Apr-19
+Super Kings	23-Apr-19
+RCB	24-Apr-19
+Royals	25-Apr-19
+Mum Indians	26-Apr-19
+Royals	27-Apr-19
+Capitals	28-Apr-19
+KKR	28-Apr-19
+Sunrisers	29-Apr-19
+no result	30-Apr-19
+Super Kings	1-May-19
+tied	2-May-19
+KKR	3-May-19
+Capitals	4-May-19
+RCB	4-May-19
+Kings XI	5-May-19
+Mum Indians	5-May-19
+Mum Indians	7-May-19
+Capitals	8-May-19
+Super Kings	10-May-19
+Mum Indians	12-May-19
