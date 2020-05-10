@@ -33,6 +33,7 @@ namespace COVID_Data_Filtration
         public static void WriteToOutputFile(string sourceFile, string[] outputBuffer)
         {
             File.WriteAllLines(sourceFile, outputBuffer);
+            Console.WriteLine($"Output file is created succesfully at location : {sourceFile}");
         }
 
         public static string[] FetchContentsOfTextFile(string textFilePath)

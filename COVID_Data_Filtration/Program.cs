@@ -122,24 +122,42 @@ namespace COVID_Data_Filtration
 
 
 
-            // ====================== IPL Data ============================= //
-            string SourceFile = "..\\..\\IPL_Data.txt";
-            string OutputFile = "..\\..\\IPL_OutPut.txt";
+            //// ====================== IPL Data ============================= //
+            //string SourceFile = "..\\..\\IPL_Data.txt";
+            //string OutputFile = "..\\..\\IPL_OutPut.txt";
+            //StringBuilder FirstLine = new StringBuilder();
+            //int noOfLines = CommonUtility.ReadNoOfLines(SourceFile);
+            //List<DateTime> uniqueDates = new List<DateTime>();                      // Generic List of type DateTime
+            //List<string> teams = new List<string>();                                // Generic List to fetch 2nd primary key/unique key in input file
+            //Dictionary<string, string> teamsData = new Dictionary<string, string>();
+            //FetchNoOfUniqueKeysAndDates(SourceFile, ref teams, ref uniqueDates, ref FirstLine);
+            //// Processing Data
+            //Dictionary<string, string> FormattedData = SeasonStatsForTeams(SourceFile, ref teamsData, uniqueDates, teams);
+
+            //string[] outputBuffer = new string[teams.Count + 1];                    // array to hold each team data plus column fields
+            //PrepareOutputBuffer(ref outputBuffer, FirstLine, FormattedData);        // created Output buffer which is array of strings from FormattedData dictonary
+            //CommonUtility.WriteToOutputFile(OutputFile, outputBuffer);              // Flush data
+
+
+
+            // ====================== Bollywood Data ============================= //
+            string SourceFile = "..\\..\\Bollywood_Data.txt";
+            string OutputFile = "..\\..\\Bollywood_OutPut.txt";
             StringBuilder FirstLine = new StringBuilder();
             int noOfLines = CommonUtility.ReadNoOfLines(SourceFile);
             List<DateTime> uniqueDates = new List<DateTime>();                      // Generic List of type DateTime
-            List<string> teams = new List<string>();                                // Generic List to fetch 2nd primary key/unique key in input file
-            Dictionary<string, string> teamsData = new Dictionary<string, string>();
-            FetchNoOfUniqueKeysAndDates(SourceFile, ref teams, ref uniqueDates, ref FirstLine);
+            List<string> category = new List<string>();                             // Generic List to fetch 2nd primary key/unique key in input file
+            Dictionary<string, string> categoryData = new Dictionary<string, string>();
+            FetchNoOfUniqueKeysAndDates(SourceFile, ref category, ref uniqueDates, ref FirstLine, 1, 0);
             // Processing Data
-            Dictionary<string,string> FormattedData = SeasonStatsForTeams(SourceFile, ref teamsData, uniqueDates, teams);
+            Dictionary<string, string> FormattedData = SeasonStatsForTeams(SourceFile, ref categoryData, uniqueDates, category, 1, 0);
 
-            string[] outputBuffer = new string[teams.Count + 1];                    // array to hold each team data plus column fields
+            string[] outputBuffer = new string[category.Count + 1];                 // array to hold each team data plus column fields
             PrepareOutputBuffer(ref outputBuffer, FirstLine, FormattedData);        // created Output buffer which is array of strings from FormattedData dictonary
             CommonUtility.WriteToOutputFile(OutputFile, outputBuffer);              // Flush data
         }
 
-        private static void FetchNoOfUniqueKeysAndDates(string textFilePath, ref List<string> teams, ref List<DateTime> uniqueDates, ref StringBuilder firstLine)
+        private static void FetchNoOfUniqueKeysAndDates(string textFilePath, ref List<string> category, ref List<DateTime> uniqueDates, ref StringBuilder firstLine, int categoryIndex = 0, int dateIndex = 1)
         {
             using (StreamReader file = new StreamReader(textFilePath))
             {
@@ -151,11 +169,11 @@ namespace COVID_Data_Filtration
                     string[] fields = line.Split('\t');
                     if (readLine)
                     {
-                        if (!teams.Contains(fields[0]))
-                            teams.Add(fields[0]);                                          // Append unique states to List
-                        if (!uniqueDates.Contains(Convert.ToDateTime(fields[1])))
+                        if (!category.Contains(fields[categoryIndex]))
+                            category.Add(fields[categoryIndex]);                                          // Append unique states to List
+                        if (!uniqueDates.Contains(Convert.ToDateTime(fields[dateIndex])))
                         {
-                            dt = Convert.ToDateTime(fields[1]);
+                            dt = Convert.ToDateTime(fields[dateIndex]);
                             uniqueDates.Add(dt);                                                    // Append unique dates to list
                             firstLine.Append(tabSpace).Append(dt.ToString("dd/MMM/yyyy"));        // Append unique dates to List of Columns
                         }
@@ -168,21 +186,21 @@ namespace COVID_Data_Filtration
             }
         }
 
-        private static Dictionary<string, string> SeasonStatsForTeams(string sourceFile, ref Dictionary<string, string> teamsWinData, List<DateTime> uniqueDates, List<string> teams)
+        private static Dictionary<string, string> SeasonStatsForTeams(string sourceFile, ref Dictionary<string, string> categoryData, List<DateTime> uniqueDates, List<string> category, int categoryIndex = 0, int dateIndex = 1)
         {
             Dictionary<string, string> MasterData = new Dictionary<string, string>();       // Final Dictonary which is being flushed in Output text file
             Dictionary<string, int> CurrentDate_Data = new Dictionary<string, int>();       // Dictonary to hold values of team win on a particular date.
-            InitializeTeams(ref CurrentDate_Data, teams);                                   // Reset All Teams Data to Zero
+            InitializeTeams(ref CurrentDate_Data, category);                                   // Reset All Teams Data to Zero
             using (StreamReader file = new StreamReader(sourceFile))
             {
                 int lineNo = 0;
-                string line, previousDate = "", teamName, currentDate;
+                string line, previousDate = "", categoryName, currentDate;
                 bool skipOnce = false;
                 while ((line = file.ReadLine()) != null)
                 {
                     string[] fields = line.Split('\t');
-                    teamName = fields[0];
-                    currentDate = fields[1];
+                    categoryName = fields[categoryIndex];
+                    currentDate = fields[dateIndex];
                     if (lineNo > 0)
                     {
                         if (currentDate != previousDate)
@@ -191,7 +209,7 @@ namespace COVID_Data_Filtration
                                 FlushDataTillLastDate(ref MasterData, CurrentDate_Data); skipOnce = true;
                             previousDate = currentDate;
                         }
-                        CurrentDate_Data[teamName] += 1;
+                        CurrentDate_Data[categoryName] += 1;
                     }
                     lineNo++;
                 }

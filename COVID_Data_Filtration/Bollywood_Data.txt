@@ -1,0 +1,301 @@
+﻿RELEASE DATE	Category
+24 Dec 1993	Blockbuster
+21 Jan 1994	Super Hit
+21 Jan 1994	Hit
+04 Feb 1994	Super Hit
+25 Feb 1994	Semi Hit
+18 Mar 1994	Semi Hit
+25 Mar 1994	Hit
+25 Mar 1994	Semi Hit
+22 Apr 1994	Average
+29 Apr 1994	Semi Hit
+06 May 1994	Hit
+10 Jun 1994	Semi Hit
+17 Jun 1994	Average
+24 Jun 1994	Semi Hit
+01 Jul 1994	Blockbuster
+22 Jul 1994	Blockbuster
+05 Aug 1994	All Time Blockbuster
+05 Aug 1994	Hit
+23 Sep 1994	Hit
+04 Nov 1994	Hit
+02 Dec 1994	Semi Hit
+13 Jan 1995	Blockbuster
+12 May 1995	Super Hit
+02 Jun 1995	Blockbuster
+09 Jun 1995	Hit
+23 Jun 1995	Hit
+30 Jun 1995	Super Hit
+08 Sep 1995	Blockbuster
+15 Sep 1995	Semi Hit
+06 Oct 1995	Super Hit
+20 Oct 1995	All Time Blockbuster
+01 Dec 1995	Hit
+26 Jan 1996	Super Hit
+29 Mar 1996	Blockbuster
+12 Apr 1996	Super Hit
+17 May 1996	Hit
+24 May 1996	Hit
+07 Jun 1996	Semi Hit
+14 Jun 1996	Super Hit
+28 Jun 1996	Hit
+02 Aug 1996	Average
+23 Aug 1996	Super Hit
+27 Sep 1996	Semi Hit
+08 Nov 1996	Super Hit
+11 Nov 1996	All Time Blockbuster
+06 Dec 1996	Hit
+27 Dec 1996	Average
+03 Jan 1997	Semi Hit
+07 Feb 1997	Hit
+07 Feb 1997	Semi Hit
+21 Feb 1997	Super Hit
+28 Feb 1997	Super Hit
+11 Apr 1997	Super Hit
+18 Apr 1997	Average
+30 May 1997	Hit
+13 Jun 1997	All Time Blockbuster
+04 Jul 1997	Hit
+18 Jul 1997	Hit
+08 Aug 1997	Super Hit
+10 Oct 1997	Hit
+10 Oct 1997	Semi Hit
+31 Oct 1997	Blockbuster
+31 Oct 1997	Semi Hit
+31 Oct 1997	Semi Hit
+28 Nov 1997	Super Hit
+12 Dec 1997	Semi Hit
+19 Dec 1997	Hit
+13 Mar 1998	Semi Hit
+27 Mar 1998	Super Hit
+22 May 1998	Semi Hit
+19 Jun 1998	Hit
+26 Jun 1998	Semi Hit
+03 Jul 1998	Hit
+10 Jul 1998	Hit
+24 Jul 1998	Super Hit
+14 Aug 1998	Semi Hit
+02 Oct 1998	Hit
+16 Oct 1998	All Time Blockbuster
+16 Oct 1998	Hit
+20 Nov 1998	Super Hit
+27 Nov 1998	Average
+22 Jan 1999	Super Hit
+12 Feb 1999	Hit
+19 Feb 1999	Hit
+09 Apr 1999	Semi Hit
+30 Apr 1999	Hit
+07 May 1999	Semi Hit
+28 May 1999	Super Hit
+04 Jun 1999	Semi Hit
+18 Jun 1999	Hit
+25 Jun 1999	Hit
+09 Jul 1999	Average
+23 Jul 1999	Average
+30 Jul 1999	Semi Hit
+13 Aug 1999	Semi Hit
+20 Aug 1999	Average
+27 Aug 1999	Average
+15 Oct 1999	Semi Hit
+05 Nov 1999	Blockbuster
+24 Dec 1999	Semi Hit
+14 Jan 2000	Blockbuster
+11 Feb 2000	Hit
+24 Mar 2000	Hit
+19 May 2000	Super Hit
+25 Aug 2000	Hit
+08 Sep 2000	Semi Hit
+27 Oct 2000	Blockbuster
+09 Mar 2001	Semi Hit
+13 Apr 2001	Hit
+25 May 2001	Super Hit
+15 Jun 2001	All Time Blockbuster
+15 Jun 2001	Hit
+26 Oct 2001	Hit
+14 Dec 2001	Blockbuster
+28 Dec 2001	Semi Hit
+01 Feb 2002	Blockbuster
+07 Jun 2002	Semi Hit
+12 Jul 2002	Hit
+06 Sep 2002	Hit
+20 Dec 2002	Hit
+03 Jan 2003	Semi Hit
+17 Jan 2003	Hit
+23 May 2003	Hit
+30 May 2003	Hit
+13 Jun 2003	Hit
+01 Aug 2003	Semi Hit
+08 Aug 2003	Super Hit
+15 Aug 2003	Semi Hit
+03 Oct 2003	Hit
+27 Nov 2003	Hit
+19 Dec 2003	Hit
+27 Feb 2004	Semi Hit
+02 Apr 2004	Super Hit
+09 Apr 2004	Hit
+30 Apr 2004	Hit
+28 May 2004	Hit
+23 Jul 2004	Semi Hit
+30 Jul 2004	Hit
+27 Aug 2004	Super Hit
+12 Nov 2004	Super Hit
+26 Nov 2004	Hit
+06 May 2005	Hit
+27 May 2005	Super Hit
+01 Jul 2005	Semi Hit
+15 Jul 2005	Semi Hit
+26 Aug 2005	Super Hit
+09 Sep 2005	Hit
+02 Nov 2005	Hit
+02 Dec 2005	Semi Hit
+16 Dec 2005	Semi Hit
+26 Jan 2006	Hit
+24 Feb 2006	Semi Hit
+10 Mar 2006	Super Hit
+28 Apr 2006	Semi Hit
+05 May 2006	Semi Hit
+26 May 2006	Super Hit
+09 Jun 2006	Super Hit
+23 Jun 2006	Blockbuster
+14 Jul 2006	Hit
+11 Aug 2006	Semi Hit
+01 Sep 2006	Blockbuster
+20 Oct 2006	Hit
+10 Nov 2006	Blockbuster
+10 Nov 2006	Semi Hit
+24 Nov 2006	Blockbuster
+22 Dec 2006	Hit
+12 Jan 2007	Hit
+23 Mar 2007	Semi Hit
+13 Apr 2007	Hit
+27 Apr 2007	Semi Hit
+25 May 2007	Semi Hit
+25 May 2007	Semi Hit
+20 Jul 2007	Super Hit
+10 Aug 2007	Super Hit
+24 Aug 2007	Hit
+07 Sep 2007	Semi Hit
+12 Oct 2007	Hit
+26 Oct 2007	Hit
+09 Nov 2007	Blockbuster
+21 Dec 2007	Super Hit
+21 Dec 2007	Super Hit
+15 Feb 2008	Semi Hit
+21 Mar 2008	Hit
+16 May 2008	Super Hit
+04 Jul 2008	Super Hit
+08 Aug 2008	Super Hit
+15 Aug 2008	Semi Hit
+22 Aug 2008	Hit
+06 Sep 2008	Hit
+29 Oct 2008	Hit
+12 Dec 2008	Blockbuster
+25 Dec 2008	Blockbuster
+23 Jan 2009	Semi Hit
+26 Jun 2009	Hit
+31 Jul 2009	Hit
+18 Sep 2009	Hit
+02 Oct 2009	Semi Hit
+06 Nov 2009	Super Hit
+04 Dec 2009	Semi Hit
+24 Dec 2009	All Time Blockbuster
+12 Feb 2010	Hit
+30 Apr 2010	Hit
+04 Jun 2010	Super Hit
+30 Jul 2010	Hit
+10 Sep 2010	Blockbuster
+05 Nov 2010	Blockbuster
+14 Jan 2011	Hit
+03 Jun 2011	Blockbuster
+08 Jul 2011	Super Hit
+15 Jul 2011	Hit
+22 Jul 2011	Super Hit
+31 Aug 2011	Blockbuster
+09 Sep 2011	Hit
+26 Oct 2011	Hit
+02 Dec 2011	Super Hit
+23 Dec 2011	Hit
+26 Jan 2012	Super Hit
+06 Apr 2012	Super Hit
+01 Jun 2012	Blockbuster
+06 Jul 2012	Hit
+13 Jul 2012	Hit
+15 Aug 2012	Blockbuster
+07 Sep 2012	Super Hit
+14 Sep 2012	Super Hit
+28 Sep 2012	Super Hit
+13 Nov 2012	Hit
+13 Nov 2012	Hit
+21 Dec 2012	Blockbuster
+26 Apr 2013	Blockbuster
+31 May 2013	Blockbuster
+21 Jun 2013	Hit
+12 Jul 2013	Super Hit
+08 Aug 2013	Blockbuster
+13 Sep 2013	Super Hit
+01 Nov 2013	Blockbuster
+15 Nov 2013	Hit
+20 Dec 2013	All Time Blockbuster
+18 Apr 2014	Super Hit
+06 Jun 2014	Hit
+27 Jun 2014	Super Hit
+11 Jul 2014	Hit
+25 Jul 2014	Blockbuster
+15 Aug 2014	Super Hit
+24 Oct 2014	Super Hit
+19 Dec 2014	All Time Blockbuster
+08 May 2015	Hit
+22 May 2015	Blockbuster
+19 Jun 2015	Super Hit
+10 Jul 2015	Blockbuster
+17 Jul 2015	All Time Blockbuster
+16 Oct 2015	Super Hit
+12 Nov 2015	Hit
+18 Dec 2015	Hit
+22 Jan 2016	Super Hit
+19 Feb 2016	Hit
+29 Apr 2016	Hit
+03 Jun 2016	Hit
+06 Jul 2016	Blockbuster
+12 Aug 2016	Super Hit
+30 Sep 2016	Hit
+28 Oct 2016	Hit
+23 Dec 2016	All Time Blockbuster
+10 Feb 2017	Hit
+10 Mar 2017	Super Hit
+28 Apr 2017	All Time Blockbuster
+11 Aug 2017	Super Hit
+29 Sep 2017	Super Hit
+20 Oct 2017	Blockbuster
+08 Dec 2017	Super Hit
+22 Dec 2017	Blockbuster
+25 Jan 2018	Blockbuster
+23 Feb 2018	Super Hit
+16 Mar 2018	Hit
+30 Mar 2018	Blockbuster
+11 May 2018	Super Hit
+01 Jun 2018	Hit
+20 Jul 2018	Hit
+15 Aug 2018	Hit
+31 Aug 2018	Super Hit
+05 Oct 2018	Hit
+18 Oct 2018	Blockbuster
+29 Nov 2018	Super Hit
+28 Dec 2018	Blockbuster
+11 Jan 2019	Blockbuster
+14 Feb 2019	Hit
+22 Feb 2019	Hit
+01 Mar 2019	Hit
+08 Mar 2019	Hit
+21 Mar 2019	Hit
+12 Jul 2019	Hit
+15 Aug 2019	Super Hit
+15 Aug 2019	Hit
+30 Aug 2019	Hit
+06 Sep 2019	Super Hit
+13 Sep 2019	Super Hit
+02 Oct 2019	Blockbuster
+25 Oct 2019	Super Hit
+08 Nov 2019	Super Hit
+13 Dec 2019	Hit
+27 Dec 2019	Super Hit

@@ -50,6 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Bollywood_Data.txt" />
     <Content Include="IPL_Data.txt" />
     <Content Include="OutputFile.txt" />
     <Content Include="SourceFile.txt" />
